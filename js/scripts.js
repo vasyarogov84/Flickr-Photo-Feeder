@@ -1,13 +1,19 @@
-$(document).ready(()=>{
-  $('button').on('click', ()=>{
-    $(this).removeClass("selected");
-    $(this).addClass("selected");
+
+
+$(document).ready( ()=>{
+  $('form').on('click', ()=>{
+    // $(this).removeClass("selected");
+    // $(this).addClass("selected");
+
     var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-    var animal = $(this).text();
+
+    var animal = $("#search").val();
+
     var flickrOptions = {
       tags: animal,
       format: "json"
     };
+
     function displayPhotos(data) {
       var photoHTML = '<ul>';
       $.each(data.items, function(i, photo) {
@@ -18,6 +24,7 @@ $(document).ready(()=>{
       photoHTML += '</ul>';
       $("#photos").html(photoHTML);
     }
+
     $.getJSON(flickerAPI, flickrOptions, displayPhotos);
   });
 });
